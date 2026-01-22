@@ -1,91 +1,74 @@
 # AGENTS.md
 
-This file provides guidance to AI coding agents (Claude Code, Cursor, Copilot, Windsurf, etc.) when working with this repository.
+Guidance for AI coding agents working with this repository.
 
-## Repository Overview
+## What This Skill Is
 
-A collection of skills for AI coding agents to work with Docusaurus documentation sites. Skills are packaged instructions and resources that extend agent capabilities for creating, editing, and managing Docusaurus projects.
+An opinionated documentation skill built on the Diátaxis framework. Unlike reference-heavy skills, this one:
 
-## Available Skills
+1. **Asks questions before generating.** Audience, outcome, and quadrant matter.
+2. **Has strong opinions.** Structure, language, and patterns are prescribed.
+3. **Refuses certain things.** Won't mix doc types, won't use exclusionary language.
 
-### docusaurus
+## The Core Philosophy
 
-Comprehensive Docusaurus site management skill covering:
-- Creating and editing documentation pages
-- Managing sidebars and navigation
-- Configuring blogs and authors
-- Site configuration (themes, plugins, SEO)
-- MDX features (admonitions, tabs, code blocks)
-- Deployment to various platforms
+Documentation enables. Every page answers: "What can the reader DO after?"
 
-**Triggers:** Working with `.md/.mdx` files, `docusaurus.config.ts`, `sidebars.js`, or any Docusaurus-related task.
+## Diátaxis Quadrants
 
-## Skill Structure
+Before creating any documentation, identify the quadrant:
+
+- **Tutorial:** Learning-oriented. Reader says "teach me."
+- **How-to:** Task-oriented. Reader says "help me do X."
+- **Reference:** Information-oriented. Reader says "what is Y?"
+- **Explanation:** Understanding-oriented. Reader says "why does Z?"
+
+**Rule:** Don't mix them. One page, one quadrant.
+
+## When Using This Skill
+
+### Ask These Questions
+
+1. Who is reading this?
+2. What should they be able to DO after?
+3. Which Diátaxis quadrant is this?
+4. What do they already know?
+
+### Apply These Rules
+
+**Language:**
+- No "simple," "easy," "just," "obviously"
+- Use allowlist/blocklist, not whitelist/blacklist
+- "You" for the reader, "they" for hypothetical users
+
+**Structure:**
+- Sidebar depth ≤ 3 levels
+- One admonition per section max
+- Title describes action, not topic
+
+**Content:**
+- Context before code
+- Minimal examples first, comprehensive second
+- Link to other quadrants, don't embed them
+
+## File Structure
 
 ```
-skills/
-  docusaurus/
-    SKILL.md              # Main skill instructions
-    references/           # Detailed reference documentation
-      frontmatter.md      # Doc/blog frontmatter fields
-      sidebar-config.md   # Sidebar configuration patterns
-      mdx-features.md     # MDX components and syntax
-      config-options.md   # docusaurus.config.ts options
-      blog-config.md      # Blog setup and configuration
-      deployment.md       # Deployment guides
-    scripts/              # Helper scripts
-      new-doc.sh          # Create new documentation page
-      new-blog.sh         # Create new blog post
-      validate.sh         # Validate site for issues
+skills/docusaurus/
+├── SKILL.md                    # Core guidance (~170 lines)
+├── metadata.json               # Skill metadata
+└── references/
+    ├── diataxis-patterns.md    # Templates for each quadrant
+    ├── writing-guide.md        # Voice, tone, inclusive language
+    ├── config-reference.md     # docusaurus.config.ts essentials
+    └── deployment.md           # Platform deployment guides
 ```
-
-## Using Skills
-
-### Installation
-
-**Claude Code / Claude Desktop:**
-```bash
-npx skills add vipulgupta2048/docusaurus-skill
-```
-
-**Manual installation:**
-```bash
-cp -r skills/docusaurus ~/.claude/skills/
-```
-
-**Claude.ai Projects:**
-Add `skills/docusaurus/SKILL.md` to project knowledge.
-
-### Invocation
-
-Skills activate automatically when relevant tasks are detected. You can also explicitly invoke:
-- `/docusaurus` - Load the Docusaurus skill
 
 ## Contributing
 
-### Adding New Content
+When editing this skill:
 
-1. Reference files go in `skills/docusaurus/references/`
-2. Scripts go in `skills/docusaurus/scripts/`
-3. Keep SKILL.md under 500 lines; use references for detailed content
-
-### Testing Changes
-
-1. Copy skill to `~/.claude/skills/docusaurus`
-2. Test with Claude Code on a real Docusaurus project
-3. Verify all script outputs are valid JSON
-
-### Packaging
-
-After changes, create the distribution package:
-```bash
-cd skills
-zip -r docusaurus.zip docusaurus/
-```
-
-## Best Practices for Context Efficiency
-
-- **SKILL.md stays lean** - Only essential workflows and quick references
-- **References for depth** - Detailed tables, examples, and configurations
-- **Scripts for reliability** - Deterministic operations that don't consume context
-- **Progressive disclosure** - Agent loads references only when needed
+1. Keep SKILL.md under 200 lines
+2. Opinions go in SKILL.md, details go in references
+3. Don't add code examples that Docusaurus docs already have
+4. Test on real documentation projects

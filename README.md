@@ -1,160 +1,122 @@
 # Docusaurus Skill
 
-> The definitive AI agent skill for managing Docusaurus documentation sites.
+> Opinionated guidance for building documentation people actually read.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![Skills.sh](https://img.shields.io/badge/skills.sh-listed-brightgreen)](https://skills.sh)
-[![Docusaurus](https://img.shields.io/badge/Docusaurus-3.x-green)](https://docusaurus.io)
+[![Diátaxis](https://img.shields.io/badge/Framework-Diátaxis-purple)](https://diataxis.fr/)
 
-Built from experience managing **30+ Docusaurus sites**. Stop wrestling with configs. Start shipping docs.
+Built from managing 30+ Docusaurus sites. Has opinions. Will ask questions.
 
-## What This Skill Does
+## Philosophy
 
-Transform your AI coding agent into a Docusaurus expert:
+Documentation isn't about documenting—it's about **enabling**.
 
-| Task | Before | After |
-|------|--------|-------|
-| Create doc page | Google frontmatter fields, copy-paste templates | `"Create a getting started guide"` |
-| Configure sidebar | Read docs, trial-and-error | `"Add this to the API section"` |
-| Set up blog | Configure authors, tags, feeds manually | `"Set up a blog with RSS"` |
-| Deploy | Research platform-specific configs | `"Deploy to Vercel"` |
+Every page should answer: *What can the reader DO after reading this?*
 
-## Quick Start
+## The Diátaxis Framework
 
-### Installation
+This skill organizes docs into four quadrants:
 
-**Via skills.sh (Recommended):**
+| Type | Purpose | Reader's Question |
+|------|---------|-------------------|
+| **Tutorial** | Learning | "Teach me to..." |
+| **How-to** | Doing | "How do I...?" |
+| **Reference** | Information | "What is...?" |
+| **Explanation** | Understanding | "Why does...?" |
+
+**The rule:** Don't mix them. A tutorial that becomes reference loses both audiences.
+
+## What Makes This Different
+
+Most documentation skills give you code snippets. This one gives you opinions:
+
+- **Asks questions first.** Who's reading? What should they DO after? Which quadrant?
+- **Inclusive language required.** No "whitelist," no "simple," no "guys."
+- **Structure that scales.** Learn → Do → Understand → Look up.
+- **Won't generate walls of code.** Context first, examples second.
+
+## Installation
+
 ```bash
 npx skills add vipulgupta2048/docusaurus-skill
 ```
 
-**Claude Code / Claude Desktop:**
+Or manually:
 ```bash
-# Clone and copy to skills directory
 git clone https://github.com/vipulgupta2048/docusaurus-skill.git
 cp -r docusaurus-skill/skills/docusaurus ~/.claude/skills/
 ```
 
-**Claude.ai Projects:**
-1. Download `skills/docusaurus/SKILL.md`
-2. Add to your project's knowledge base
+## What It Does
 
-### Usage
-
-Once installed, the skill activates automatically when you work on Docusaurus projects. Just ask naturally:
-
+Tell the skill what you're building:
 ```
-"Create a new doc page called Authentication Guide"
-"Add a category for API Reference in the sidebar"
-"Set up a blog with author profiles"
-"Help me configure Algolia search"
-"Deploy this to GitHub Pages"
+"I need to document our authentication API for developers"
 ```
 
-## Features
+It'll ask:
+1. Who's reading this? (New users? Experienced devs?)
+2. What should they DO after? (Implement auth? Understand the flow?)
+3. Which quadrant? (Tutorial? Reference?)
+4. What do they already know?
 
-### Documentation Management
-- Create pages with proper frontmatter
-- Organize with categories and generated indexes
-- Handle MDX components (admonitions, tabs, code blocks)
-- Manage internal linking and navigation
+Then it builds the right structure.
 
-### Blog System
-- Set up authors.yml with profiles
-- Create posts with tags and images
-- Configure RSS/Atom feeds
-- Multiple blog support
+## What It Won't Do
 
-### Site Configuration
-- Navbar and footer customization
-- Theme and plugin setup
-- SEO optimization (meta tags, structured data)
-- Search integration (Algolia)
-
-### Deployment
-- GitHub Pages with Actions workflow
-- Vercel (auto-detect)
-- Netlify with redirects
-- Cloudflare Pages
-- Docker containerization
+- Create docs without understanding the audience
+- Mix documentation types in one page
+- Add "simple" or "easy" to instructions
+- Skip the frontmatter description field
+- Create sidebars deeper than 3 levels
 
 ## Skill Contents
 
 ```
 skills/docusaurus/
-├── SKILL.md                    # Core instructions (loaded on activation)
-├── metadata.json               # Skill metadata
-├── references/                 # Detailed documentation
-│   ├── frontmatter.md          # All frontmatter fields
-│   ├── sidebar-config.md       # Sidebar patterns
-│   ├── mdx-features.md         # MDX syntax and components
-│   ├── config-options.md       # docusaurus.config.ts
-│   ├── blog-config.md          # Blog setup
-│   └── deployment.md           # Platform guides
-└── scripts/                    # Helper scripts
-    ├── new-doc.sh              # Create doc page
-    ├── new-blog.sh             # Create blog post
-    └── validate.sh             # Validate site
+├── SKILL.md                           # Core guidance (166 lines)
+├── metadata.json
+└── references/
+    ├── diataxis-patterns.md           # Templates per quadrant
+    ├── writing-guide.md               # Voice, tone, inclusive language
+    ├── config-reference.md            # Essential config options
+    └── deployment.md                  # Platform guides
 ```
 
-## Why This Skill?
+## The Opinions
 
-### Context-Efficient Design
-- **SKILL.md** is under 200 lines - loads fast, leaves room for your code
-- **References** load only when needed - deep documentation on demand
-- **Scripts** execute without reading - deterministic operations
-
-### Battle-Tested
-Built from managing documentation for:
-- Multi-product documentation portals
-- Open-source project docs
-- Company knowledge bases
-- Developer documentation at scale
-
-### Always Current
-Maintained against Docusaurus 3.x with regular updates for new features.
-
-## Supported Platforms
-
-| Platform | Status |
-|----------|--------|
-| Claude Code | ✅ Full support |
-| Claude Desktop | ✅ Full support |
-| Cursor | ✅ Compatible |
-| Windsurf | ✅ Compatible |
-| GitHub Copilot | ✅ Compatible |
-| Other agents | ⚡ Works with SKILL.md |
-
-## Contributing
-
-Contributions welcome! See [AGENTS.md](AGENTS.md) for development guidelines.
-
-```bash
-# Clone the repo
-git clone https://github.com/vipulgupta2048/docusaurus-skill.git
-cd docusaurus-skill
-
-# Make changes to skills/docusaurus/
-
-# Test locally
-cp -r skills/docusaurus ~/.claude/skills/
-
-# Package for distribution
-cd skills && zip -r docusaurus.zip docusaurus/
+**On structure:**
+```
+docs/
+├── getting-started/    # Tutorials
+├── guides/             # How-tos
+├── concepts/           # Explanation
+├── reference/          # Reference
+└── resources/          # Links, changelog
 ```
 
-## Related
+**On language:**
 
-- [Docusaurus Documentation](https://docusaurus.io/docs)
-- [skills.sh Directory](https://skills.sh)
-- [Agent Skills Format](https://agentskills.io)
+| Don't | Do |
+|-------|-----|
+| whitelist/blacklist | allowlist/blocklist |
+| master/slave | primary/replica |
+| simple, easy | *(just remove it)* |
+| sanity check | confidence check |
+
+**On admonitions:**
+One per section. If everything is highlighted, nothing is.
+
+## Credits
+
+- [Diátaxis](https://diataxis.fr/) by Daniele Procida
+- [Google's inclusive documentation guide](https://developers.google.com/style/inclusive-documentation)
+- Lessons from 30+ Docusaurus sites at [Balena](https://balena.io)
 
 ## License
 
-MIT - Use it, fork it, improve it.
+MIT
 
 ---
 
-**Built with caffeine and documentation obsession by [@vipulgupta2048](https://github.com/vipulgupta2048)**
-
-*Managing docs at scale? Let's talk: [vipulgupta2048@gmail.com](mailto:vipulgupta2048@gmail.com)*
+*Questions? Opinions of your own? [Open an issue](https://github.com/vipulgupta2048/docusaurus-skill/issues).*
