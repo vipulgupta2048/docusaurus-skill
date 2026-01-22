@@ -1,80 +1,34 @@
 {
   "name": "docusaurus",
-  "version": "1.0.0",
-  "description": "Comprehensive skill for managing Docusaurus documentation sites with AI coding agents",
+  "version": "2.0.0",
+  "description": "Opinionated documentation skill built on Diátaxis framework",
   "author": "Vipul Gupta (@vipulgupta2048)",
   "license": "MIT",
   "repository": "https://github.com/vipulgupta2048/docusaurus-skill",
-  "organization": "Independent",
-  "date": "January 2026",
-  "abstract": "Production-ready skill for AI agents to create, edit, and manage Docusaurus documentation sites. Built from experience managing 30+ Docusaurus sites at scale. Covers documentation pages, blog posts, sidebar configuration, site settings, MDX features, and deployment workflows across major platforms.",
-  "keywords": [
-    "docusaurus",
-    "documentation",
-    "static-site-generator",
-    "mdx",
-    "react",
-    "docs-as-code",
-    "technical-writing",
-    "ai-agent",
-    "claude-code",
-    "skills"
+  "philosophy": "Documentation isn't about documenting—it's about enabling.",
+  "framework": "Diátaxis",
+  "opinions": [
+    "Every doc must answer: what can the reader DO after reading this?",
+    "Never mix tutorials, how-tos, reference, and explanation",
+    "Inclusive language is required, not optional",
+    "Words like 'simple' and 'easy' are banned",
+    "Start minimal, add complexity only when needed",
+    "No sidebars deeper than 3 levels",
+    "One admonition per section maximum"
   ],
-  "categories": [
-    "documentation",
-    "static-sites",
-    "developer-tools"
-  ],
-  "platforms": [
-    "claude-code",
-    "claude-desktop",
-    "cursor",
-    "windsurf",
-    "github-copilot"
-  ],
+  "quadrants": {
+    "tutorial": "Learning-oriented, builds something real",
+    "how-to": "Task-oriented, assumes competence",
+    "reference": "Information-oriented, mirrors code structure",
+    "explanation": "Understanding-oriented, answers why"
+  },
   "triggers": [
+    "create documentation",
+    "restructure docs",
+    "improve docs",
     "docusaurus",
-    "docs site",
-    "documentation",
-    ".md files in docs/",
-    ".mdx files",
-    "docusaurus.config",
-    "sidebars.js",
-    "create doc page",
-    "add blog post",
-    "configure sidebar"
+    "docs/",
+    "technical writing"
   ],
-  "references": [
-    "https://docusaurus.io",
-    "https://docusaurus.io/docs",
-    "https://mdxjs.com"
-  ],
-  "features": {
-    "documentation": {
-      "create": true,
-      "edit": true,
-      "frontmatter": true,
-      "mdx": true
-    },
-    "blog": {
-      "posts": true,
-      "authors": true,
-      "tags": true,
-      "rss": true
-    },
-    "configuration": {
-      "sidebars": true,
-      "navbar": true,
-      "footer": true,
-      "plugins": true,
-      "themes": true
-    },
-    "deployment": {
-      "github-pages": true,
-      "vercel": true,
-      "netlify": true,
-      "cloudflare": true,
-      "docker": true
-    }
-  }
+  "asks_questions": true
 }
