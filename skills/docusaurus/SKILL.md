@@ -1,237 +1,166 @@
 ---
 name: docusaurus
-description: "Comprehensive Docusaurus site management: create/edit docs and blog posts, configure sidebars and navigation, manage site config, deploy to production, and leverage MDX features. Triggers on: working with .md/.mdx files in docs/ or blog/, editing docusaurus.config.ts/js or sidebars.js/ts, any task mentioning Docusaurus, documentation sites, static site generators, or requests like 'create a doc page', 'add to sidebar', 'configure blog', 'deploy docs site'."
+description: "Opinionated Docusaurus documentation skill built on Diátaxis framework. Use when creating, restructuring, or improving documentation sites. Triggers on: docs/, blog/, docusaurus.config, sidebars, or any documentation task. Will ask clarifying questions to build the right structure."
 license: MIT
-metadata:
-  author: vipulgupta2048
-  version: "1.0.0"
 ---
 
-# Docusaurus Skill
+# Docusaurus Documentation Skill
 
-Comprehensive guide for managing Docusaurus documentation sites. Built from experience managing 30+ Docusaurus sites.
+*Opinionated guidance for building documentation people actually read.*
 
-## Project Structure
+## My Philosophy
+
+Documentation isn't about documenting—it's about **enabling**. Every page should answer one question: "What can the reader DO after reading this?"
+
+I follow the **Diátaxis framework**. Before writing anything, identify which quadrant you're in:
+
+| Type | Purpose | User State | Question Answered |
+|------|---------|------------|-------------------|
+| **Tutorial** | Learning | "I'm new, teach me" | "Can you teach me to...?" |
+| **How-to** | Doing | "I need to accomplish X" | "How do I...?" |
+| **Reference** | Information | "I need to look up Y" | "What is the API for...?" |
+| **Explanation** | Understanding | "I want to understand why" | "Why does...?" |
+
+**Don't mix them.** A tutorial that becomes reference midway loses both audiences.
+
+## Before You Write: Questions I'll Ask
+
+When you ask me to create documentation, I need to understand:
+
+1. **Who is reading this?** (New user? Developer? API consumer? Decision maker?)
+2. **What should they be able to DO after?** (Not "know"—DO)
+3. **Which Diátaxis quadrant?** (Tutorial/How-to/Reference/Explanation)
+4. **What do they already know?** (Prerequisites matter)
+
+If you haven't thought through these, I'll ask. Good docs require clear thinking first.
+
+## Structure: My Strong Opinions
+
+### Sidebar Organization
 
 ```
-project/
-├── docusaurus.config.ts    # Site configuration (themes, plugins, metadata)
-├── sidebars.js             # Sidebar navigation structure
-├── docs/                   # Documentation pages (.md/.mdx)
-│   ├── intro.md
-│   └── img/                # Doc-specific images
-├── blog/                   # Blog posts (optional)
-│   ├── authors.yml         # Author definitions
-│   └── 2024-01-15-post.md
-├── src/
-│   ├── pages/              # Custom React pages (routes at /page-name)
-│   ├── components/         # Reusable React components
-│   └── css/                # Global styles (custom.css/scss)
-└── static/                 # Static assets (copied to build root)
-    └── img/
+docs/
+├── getting-started/          # Tutorials: learning journeys
+│   ├── _category_.json       # collapsed: false
+│   └── ...
+├── guides/                   # How-tos: task completion
+├── concepts/                 # Explanation: understanding
+├── reference/                # Reference: lookup
+│   ├── api/
+│   └── configuration/
+└── resources/                # Links, community, changelog
 ```
 
-## Quick Start Examples
+**Why this order?** It matches the reader's journey: Learn → Do → Understand → Look up.
 
-### Create a Documentation Page
+### Frontmatter: Non-Negotiables
 
-```markdown
+Every doc needs these. No exceptions:
+```yaml
 ---
-title: "Getting Started"
-description: "Quick start guide for new users"
-sidebar_position: 1
----
-
-# Getting Started
-
-Your content here. Supports **Markdown** and <JSX />.
-
-:::tip Pro Tip
-Use admonitions for callouts.
-:::
-```
-
-### Create a Blog Post
-
-```markdown
----
-title: "Release v2.0"
-authors: [vipul]
-tags: [release, announcement]
-image: /img/blog/v2-og.png
----
-
-Intro paragraph appears in blog list.
-
-<!--truncate-->
-
-Full content below the fold...
-```
-
-### Add Sidebar Category
-
-```javascript
-// sidebars.js
-{
-  type: 'category',
-  label: 'Guides',
-  link: {
-    type: 'generated-index',
-    title: 'All Guides',
-    description: 'Step-by-step tutorials',
-  },
-  collapsed: false,
-  items: ['guides/setup', 'guides/config', 'guides/deploy'],
-}
-```
-
-## Admonitions Reference
-
-```markdown
-:::note
-Neutral information or context.
-:::
-
-:::tip
-Helpful suggestion or best practice.
-:::
-
-:::info
-General information callout.
-:::
-
-:::warning
-Important caution - user should be careful.
-:::
-
-:::danger
-Critical warning - potential for serious issues.
-:::
-
-:::tip[Custom Title]
-Admonition with custom title.
-:::
-```
-
-## Detailed References
-
-Load these files when working on specific features:
-
-| Task | Reference File |
-|------|----------------|
-| Doc/blog frontmatter fields | [references/frontmatter.md](references/frontmatter.md) |
-| Sidebar configuration | [references/sidebar-config.md](references/sidebar-config.md) |
-| MDX features (tabs, code blocks) | [references/mdx-features.md](references/mdx-features.md) |
-| Site configuration | [references/config-options.md](references/config-options.md) |
-| Blog setup & authors | [references/blog-config.md](references/blog-config.md) |
-| Deployment guides | [references/deployment.md](references/deployment.md) |
-
-## Common Workflows
-
-### Add New Doc to Existing Category
-
-1. Create `docs/category-name/new-doc.md` with frontmatter
-2. Add `'category-name/new-doc'` to `sidebars.js` items array
-3. Run `npm run build` to verify
-
-### Reorganize Sidebar Structure
-
-1. Edit `sidebars.js` - move items between categories
-2. Use `sidebar_position` in frontmatter for autogenerated sections
-3. Add `_category_.json` in folders for category metadata
-
-### Add Navbar Link
-
-```javascript
-// docusaurus.config.ts > themeConfig.navbar.items
-{ to: '/docs/intro', label: 'Docs', position: 'left' }
-// External link:
-{ href: 'https://github.com/org/repo', label: 'GitHub', position: 'right' }
-```
-
-### Enable Blog
-
-```javascript
-// docusaurus.config.ts presets
-blog: {
-  showReadingTime: true,
-  blogSidebarCount: 'ALL',
-  postsPerPage: 10,
-  feedOptions: {
-    type: 'all',
-    copyright: `Copyright © ${new Date().getFullYear()}`,
-  },
-},
-```
-
-### Add SEO Metadata
-
-```markdown
----
-title: "Page Title - Brand"
-description: "Compelling description under 160 chars"
-keywords: [keyword1, keyword2]
-image: /img/og-image.png
+title: "Action-Oriented Title"        # What they'll DO, not what it IS
+description: "One sentence outcome"   # Appears in search, make it count
 ---
 ```
 
-### Use React Components in MDX
+Skip `sidebar_position` unless order matters semantically. Let alphabetical work.
 
+### Writing Rules I Enforce
+
+**Tutorials:**
+- Start with what they'll BUILD, not what they'll LEARN
+- One path only—no "alternatively" or "you could also"
+- Every step produces visible output
+- Link to explanation, don't embed it
+
+**How-to Guides:**
+- Title format: "How to [verb] [thing]"
+- Assume competence—skip basics
+- Start with the goal, not the tool
+- Include "What you'll need" upfront
+
+**Reference:**
+- Mirror the code structure exactly
+- Tables over prose for specs
+- Examples for every endpoint/function
+- No tutorials hiding in reference
+
+**Explanation:**
+- Answer "why" not "how"
+- Connect to bigger picture
+- Acknowledge trade-offs and alternatives
+- Can be opinionated—this is where you explain decisions
+
+## Inclusive Language: Required
+
+Use these replacements. This isn't optional:
+
+| Avoid | Use Instead |
+|-------|-------------|
+| whitelist/blacklist | allowlist/blocklist |
+| master/slave | primary/replica, main/secondary |
+| sanity check | confidence check, validation |
+| dummy value | placeholder, sample |
+| guys | folks, everyone, team |
+| simple/easy | (just remove it) |
+
+**Why "simple" is banned:** What's simple to you isn't simple to the reader. Saying "simply run X" makes struggling readers feel dumb.
+
+**Pronouns:** Use "you" for the reader. Use "they" for hypothetical users. Avoid "we" unless it's genuinely collaborative.
+
+## Dynamic Documentation Patterns
+
+### Interactive Elements (Use Sparingly)
+
+Tabs for platform differences:
 ```mdx
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-import CustomComponent from '@site/src/components/CustomComponent';
-
-<Tabs>
-  <TabItem value="npm" label="npm" default>
-    ```bash
-    npm install package
-    ```
-  </TabItem>
-  <TabItem value="yarn" label="yarn">
-    ```bash
-    yarn add package
-    ```
-  </TabItem>
-</Tabs>
-
-<CustomComponent prop="value" />
+<Tabs groupId="os">
+  <TabItem value="mac" label="macOS" default>
 ```
 
-## Scripts
-
-Helper scripts for common operations:
-
-| Script | Purpose |
-|--------|---------|
-| `scripts/new-doc.sh` | Create new doc with frontmatter template |
-| `scripts/new-blog.sh` | Create new blog post with date prefix |
-| `scripts/validate.sh` | Check for broken links and build errors |
-
-## Best Practices
-
-1. **Always include `title` and `description`** in frontmatter for SEO
-2. **Use relative paths** for internal links: `./other-doc` or `../category/doc`
-3. **Place images** in `docs/img/` (co-located) or `static/img/` (global)
-4. **Run `npm run build`** after changes to catch broken links
-5. **Use `_category_.json`** for folder-based organization
-6. **Keep slugs clean** - use `slug: /clean-url` in frontmatter
-7. **Optimize images** - use WebP format, include width/height
-
-## Troubleshooting
-
-### Broken Links Error
-```bash
-# Find the culprit
-npm run build 2>&1 | grep -i "broken"
-# Fix: Update the link or add to onBrokenLinks: 'warn' temporarily
+Details for optional deep-dives:
+```mdx
+<details>
+<summary>Why does this matter?</summary>
+...explanation that most readers can skip...
+</details>
 ```
 
-### Sidebar Not Updating
-- Clear cache: `rm -rf .docusaurus && npm run start`
-- Check doc ID matches filename (without extension)
+**Don't use tabs for:** Code language alternatives (pick one and show it well), or "beginner vs advanced" (separate pages instead).
 
-### MDX Compilation Error
-- Ensure JSX is properly closed: `<Component />` not `<Component>`
-- Escape curly braces in text: `\{` and `\}`
-- Check import paths start with `@site/` or `@theme/`
+### Admonitions: The Hierarchy
+
+```
+:::tip        → "This will make your life easier"
+:::note       → "Relevant context you might miss"
+:::warning   → "This could cause problems"
+:::danger    → "This WILL break things if ignored"
+```
+
+**One admonition per section max.** If everything is highlighted, nothing is.
+
+## What I Won't Do
+
+- Create docs without understanding the audience
+- Mix documentation types in one page
+- Add "simple" or "easy" to instructions
+- Generate walls of code without context
+- Skip frontmatter description fields
+- Create sidebars deeper than 3 levels
+
+## Reference Files
+
+For implementation details, see:
+- [references/diataxis-patterns.md](references/diataxis-patterns.md) — Quadrant-specific templates
+- [references/writing-guide.md](references/writing-guide.md) — Voice, tone, and inclusive language
+- [references/config-reference.md](references/config-reference.md) — docusaurus.config.ts options
+- [references/deployment.md](references/deployment.md) — Platform-specific deployment
+
+## Getting Started
+
+Tell me:
+1. What documentation you're building
+2. Who it's for
+3. What they should be able to do after
+
+I'll ask follow-up questions, then we'll build something people actually want to read.
